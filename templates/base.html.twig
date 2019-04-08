@@ -1,12 +1,73 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {% endblock %}
+</head>
+<body>
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+           <a class="navbar-brand" href="{{ path('app_article_home') }}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                       <a class="nav-link" href="{{ path('app_article_about') }}">A propos</a>
+                    </li>
+                    <li class="nav-item active">
+                       <a class="nav-link" href="{{ path('app_article_contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="article_show" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Voir les articles</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07">
+                           <a class="dropdown-item" href="{{ path('article_create') }}">Création</a>
+                           <!-- <a class="dropdown-item" href="">Création d'un article 100</a>-->
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block flashes %}
+    <div class="container">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+<main class="container">
+    {% block body %}{% endblock %}
+</main>
+
+{% block js %}
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+</body>
 </html>
