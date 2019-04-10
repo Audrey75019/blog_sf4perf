@@ -5,10 +5,23 @@
 {% block body %}
 
 
-    <h1>{{ articles.title }}</h1>
-    <p>{{ articles.description }}</p>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.description }}</p>
 
     <a href="{{ path('article_list') }}">Retour à la liste des articles</a>
+    <h2>Commentaires</h2>
+  {% for comment in article.comments %}
+
+      <p>{{ comment.content }}</p>
+
+    {% endfor %}
+
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(commentForm) }}
+        {{ form_widget(commentForm) }}
+        <input type="submit" value="Publier" class="btn btn-success">
+        {{ form_end(commentForm) }}
+
 
 {% endblock %}
 
