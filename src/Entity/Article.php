@@ -69,7 +69,15 @@ class Article
     private $comments;
 
     /**
-     * on initialise dans le constructeur la fonction
+     * @ORM\Column(type="integer")
+     */
+    private $likes;
+
+    /**
+     * on initialise dans le constructeur:
+     * - la date de creation
+     * - le nb de vue
+     * - le nb de likes
      * Article constructor.
      * @throws \Exception
      */
@@ -81,6 +89,7 @@ class Article
         // on initialise le nombre de vues à 0
         $this->setNbViews(0);
         $this->comments = new ArrayCollection();
+        $this->setLikes(0);
     }
     public function __toString()
     {
@@ -215,6 +224,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
 
         return $this;
     }

@@ -9,6 +9,13 @@
     <p>{{ article.description }}</p>
 
     <a href="{{ path('article_list') }}">Retour à la liste des articles</a>
+
+    <div id="likes">
+        <span>{{ article.likes }}</span>
+        <button class="btn btn-primary" data-id="{{ article.id }}">
+            <i class="far fa-hand-point-right"></i>
+        </button>
+    </div>
     <h2>Commentaires</h2>
   {% for comment in article.comments %}
 
@@ -23,5 +30,12 @@
         {{ form_end(commentForm) }}
 
 
+
+
 {% endblock %}
+
+ {% block js %}
+     {{ parent() }}
+     <script src="{{ asset('js/ajax-article-likes.js') }}"></script>
+ {% endblock %}
 

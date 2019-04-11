@@ -11,8 +11,10 @@
     <li>{{ article.title}}
         <div class="btn-group" role="group" aria-label="Basic example">
             <a href="{{ path('article_show', {id: article.id }) }}" class="btn btn-sm  btn-outline-secondary">Lire l'article</a>
+            {% if is_granted('ROLE_MODERATEUR') %}
             <a href="{{ path('article_update', {id: article.id }) }}" class="btn btn-sm btn-outline-secondary">Modifier l'article</a>
             <a href="{{ path('article_delete', {id: article.id }) }}" class="btn btn-sm btn-outline-secondary">Supprimer l'article</a>
+            {% endif %}
         </div>
     {% endfor %}
     </ul>
