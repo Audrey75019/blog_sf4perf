@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentFrontType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,14 +18,19 @@ class ArticleController extends AbstractController
      * @Route ("/", name="article_list")
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator)
     {
-        //récupération du repository
-        $repository = $this->getDoctrine()->getRepository(Article::class);
-        //récupération des articles
-        $articles = $repository->findAll();
-
-        return $this->render('article/index.html.twig', ['articles' => $articles
+        $em    = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM App\Entity\Article a";
+        $query = $em->createQuery($dql);
+        // $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('article/index.html.twig', [
+            'pagination' => $pagination
         ]);
     }
 
@@ -52,13 +58,14 @@ class ArticleController extends AbstractController
             //Redirection
             return $this->redirectToRoute('article_show', [
                 'id' => $article->getId()]);
+        }
 
 //envoi du formulaire dans la vue
             return $this->render('article/create.html.twig', [
                 'createForm' => $form->createView()
             ]);
         }
-    }
+
 
     /**
      * @Route("/article/{id}", name="article_show", methods={"GET","POST"})

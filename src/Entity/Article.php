@@ -6,9 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @Gedmo\Uploadable(path="/article")
  */
 class Article
 {
@@ -39,6 +41,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * @Gedmo\UploadableFilePath
      */
     private $imageAlt;
 

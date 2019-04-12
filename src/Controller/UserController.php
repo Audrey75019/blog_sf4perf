@@ -59,5 +59,5 @@ class UserController extends AbstractController
                 'editForm' => $form->createView()
             ]);
         }
-        }
+    }
 }

@@ -31,5 +31,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/back-office/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         #si la redirection comporte une erreur dans le role de la personne qui demande l'acces, une erreur s'affiche
         #en gros c'est le controle des routes et la redirection si necessaire

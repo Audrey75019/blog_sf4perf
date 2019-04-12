@@ -1,0 +1,17 @@
+easy_admin:
+    entities:
+        Article:
+            class: App\Entity\Article
+            label: 'Les articles'
+            list:
+                title: "Liste des articles"
+            new:
+                fields: ['title', 'description', 'isPublished', 'imageSrc', 'imageAlt']
+            edit:
+                fields: ['title', 'description', 'isPublished', 'imageSrc', 'imageAlt']
+        Comment:
+            class: App\Entity\Comment
+        User:
+            class: App\Entity\User
+    site_name: 'ACME Megacorp.'
+

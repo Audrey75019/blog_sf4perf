@@ -27,6 +27,11 @@ class Comment
      */
     private $article;
 
+    public function __toString()
+    {
+        return $this->content;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
